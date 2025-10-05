@@ -93,19 +93,17 @@ const FloatingDecorations = () => {
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      setShouldAnimate(true);   // enables transitions
-      setTimeout(() => setIsLoaded(true), 100); // now slide in
+      setShouldAnimate(true);
+      setTimeout(() => setIsLoaded(true), 100);
     }, 10);
     return () => clearTimeout(timer);
   }, []);
 
-
-  // Rotation cycle animation (0° -> target -> 0° -> repeat)
   React.useEffect(() => {
     if (!isLoaded) return;
 
     const animateCycle = () => {
-      const duration = 4000; // 4 seconds per cycle
+      const duration = 4000;
       const startTime = Date.now();
 
       const animate = () => {
@@ -113,10 +111,8 @@ const FloatingDecorations = () => {
         const progress = (elapsed % duration) / duration;
 
         if (progress < 0.5) {
-          // First half: 0° -> 100% of target angle
           setCycleRotation(progress * 2);
         } else {
-          // Second half: 100% -> 0°
           setCycleRotation(2 - progress * 2);
         }
 
@@ -129,7 +125,6 @@ const FloatingDecorations = () => {
     animateCycle();
   }, [isLoaded]);
 
-  // Scroll-based rotation
   React.useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -139,7 +134,6 @@ const FloatingDecorations = () => {
       
       setScrollRotation(prev => prev - scrollDelta * 0.2);
       
-      // Hide when scrolled past 80vh
       if (currentScrollY > window.innerHeight * 0.8) {
         setIsVisible(false);
       } else {
@@ -158,35 +152,35 @@ const FloatingDecorations = () => {
       src: 'corner1.webp',
       baseRotation: 10,
       position: { bottom: '5%', left: '15%' },
-      entry: 'bottom', // comes from bottom
+      entry: 'bottom',
       exit: { bottom: '-20%', left: '10%' }
     },
     {
       src: 'corner2.webp',
       baseRotation: -10,
       position: { top: '45%', left: '2%' },
-      entry: 'left', // comes from left
+      entry: 'left',
       exit: { top: '50%', left: '-20%' }
     },
     {
       src: 'corner3.webp',
       baseRotation: -15,
       position: { top: '15%', left: '15%' },
-      entry: 'top', // comes from top
+      entry: 'top',
       exit: { top: '-20%', left: '20%' }
     },
     {
       src: 'corner4.webp',
       baseRotation: -10,
       position: { bottom: '5%', right: '40%' },
-      entry: 'bottom', // comes from bottom
+      entry: 'bottom',
       exit: { bottom: '-20%', right: '35%' }
     },
     {
       src: 'corner5.webp',
       baseRotation: 15,
       position: { top: '15%', right: '35%' },
-      entry: 'top', // comes from top
+      entry: 'top',
       exit: { top: '-20%', right: '30%' }
     }
   ];
@@ -224,10 +218,10 @@ const FloatingDecorations = () => {
               transition: shouldAnimate
                   ? (isLoaded
                       ? (isVisible 
-                          ? 'all 1s ease-out'   // ✅ allow entry animation
-                          : 'all 0.8s ease-out' // exit animation
+                          ? 'all 1s ease-out'
+                          : 'all 0.8s ease-out'
                         )
-                      : 'all 1.8s cubic-bezier(0.34, 1.56, 0.64, 1)' // initial pop-in
+                      : 'all 1.8s cubic-bezier(0.34, 1.56, 0.64, 1)'
                     )
                   : 'none',
             }}
@@ -242,11 +236,53 @@ const FloatingDecorations = () => {
 // Profile Section Component
 const ProfileSection = () => {
   const [isHovered, setIsHovered] = React.useState(false);
+  const [ganStep, setGanStep] = React.useState(1);
+  const [displayedText, setDisplayedText] = React.useState('');
+  
+  // Change this value to adjust timing (in milliseconds)
+  const STEP_DURATION = 1500;
+  const CHAR_SPEED = 35; // milliseconds per character
+  
+  const ganLogs = [
+    '[Step 1] Initializing latent vector z...',
+    '[Step 56] Dense layer expanding features...',
+    '[Step 128] Conv2DTranspose layer generating textures...',
+    '[Step 512] Upsampling layers refining details...',
+    '[Step 1024] Generator output stabilized ✅'
+  ];
+  
+  // Typewriter effect for current log
+  React.useEffect(() => {
+    const currentLog = ganLogs[ganStep - 1];
+    let charIndex = 0;
+    setDisplayedText('');
+    
+    const typeInterval = setInterval(() => {
+      if (charIndex < currentLog.length) {
+        setDisplayedText(currentLog.substring(0, charIndex + 1));
+        charIndex++;
+      } else {
+        clearInterval(typeInterval);
+      }
+    }, CHAR_SPEED);
+    
+    return () => clearInterval(typeInterval);
+  }, [ganStep]);
+  
+  // Progress to next step
+  React.useEffect(() => {
+    if (ganStep < 5) {
+      const timer = setTimeout(() => {
+        setGanStep(prev => prev + 1);
+      }, STEP_DURATION);
+      return () => clearTimeout(timer);
+    }
+  }, [ganStep, STEP_DURATION]);
+  
   return (
     <div className="relative flex items-center justify-center gap-20 px-8 min-h-[calc(90vh-8rem)]">
       {/* Left: About Box with Corner Decorations */}
       <div className="relative w-[700px]">
-        
         
         {/* About Box */}
         <div 
@@ -300,9 +336,9 @@ const ProfileSection = () => {
              }} />
         
         {/* Photo container */}
-        <div className="relative" style={{ transform: 'rotate(2deg)' }}>
+        <div className="relative">
           <img 
-            src="profile.jpg"
+            src={`/GAN1/gan_sim_step${ganStep}.png`}
             alt="Profile"
             className="w-64 h-80 object-cover rounded-sm"
             style={{
@@ -316,6 +352,19 @@ const ProfileSection = () => {
           {/* Bold line accent */}
           <div className="absolute -bottom-3 -right-3 w-48 h-1 bg-gradient-to-r from-purple-500 to-pink-500"
                style={{ transform: 'rotate(-3deg)' }} />
+        </div>
+        
+        {/* GAN Log Terminal - Below image */}
+        <div className="mt-4 w-64 bg-black/90 border border-[#00ff00]/30 rounded px-3 py-2 font-mono text-xs text-[#00ff00] tracking-wide"
+             style={{ 
+               textShadow: '0 0 5px rgba(0,255,0,0.5)',
+               boxShadow: '0 0 10px rgba(0,255,0,0.2)',
+               minHeight: '32px'
+             }}>
+          <div className="flex items-center">
+            {displayedText}
+            <span className="animate-pulse ml-0.5">_</span>
+          </div>
         </div>
       </div>
     </div>
