@@ -43,43 +43,46 @@ const ProjectsPage = () => {
   const scrollContainerRef = useRef(null);
 
   return (
-    <div className="py-4 px-6 md:px-12 lg:px-20">
-      <div className="text-right mb-12">
-        <h1 className="text-7xl font-bold text-white mb-2" style={{ fontFamily: 'Ubuntu, sans-serif' }}>
-          Projects
-        </h1>
-        <p className="text-[#7d8590] text-lg" style={{ fontFamily: 'Ubuntu, sans-serif' }}>
-          Building solutions that solve real-world problems
-        </p>
-      </div>
+    <div className="h-screen bg-[#FF0050] text-black flex items-start px-8 py-8 overflow-hidden">
+      
+      {/* Max-width container with flex layout */}
+      <div className="max-w-7xl mx-auto w-full flex items-start gap-12 h-full">
+        
+        {/* Left Label: "WORK /" */}
+        <div className="pt-1.5"> 
+          <p 
+            className="text-m font-semibold text-black/60 tracking-[0.2em] uppercase whitespace-nowrap"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
+          >
+            WORK /
+          </p>
+        </div>
 
-      {/* Scroll Container - Hidden Scrollbar */}
-      <div
-        ref={scrollContainerRef}
-        className="snap-y snap-mandatory h-[calc(100vh-120px)] overflow-y-scroll"
-        style={{
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-        }}
-      >
-        <style>{`
-          .snap-y::-webkit-scrollbar {
-            display: none;
-          }
-        `}</style>
+        {/* Main Content Area - Scrollable */}
+        <div 
+          ref={scrollContainerRef}
+          className="flex-1 h-full overflow-y-auto snap-y snap-mandatory"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          <style>{`
+            .flex-1::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
 
-        {projects.map((project, index) => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-            index={index}
-            totalProjects={projects.length}
-          />
-        ))}
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              totalProjects={projects.length}
+            />
+          ))}
 
-        {/* All Projects Button at End */}
-        <div className="snap-start flex items-center justify-center h-[10vh]">
-          <AllProjectsButton />
+          {/* All Projects Button at End */}
+          <div className="snap-start flex items-center justify-center h-[10vh]">
+            <AllProjectsButton />
+          </div>
         </div>
       </div>
     </div>
@@ -111,7 +114,7 @@ const ProjectCard = ({ project, index, totalProjects }) => {
         currentIndex++;
 
         const char = fullText[currentIndex - 1];
-        const delay = char === '.' || char === ',' ?700 : 15 + Math.random() * 20;
+        const delay = char === '.' || char === ',' ? 700 : 15 + Math.random() * 20;
 
         typingRef.current = setTimeout(typeNextChar, delay);
       }
@@ -143,27 +146,27 @@ const ProjectCard = ({ project, index, totalProjects }) => {
   }, []);
 
   const aspectRatio = 1275 / 675;
-  const cardWidth = 800;
+  const cardWidth = 650;
   const cardHeight = cardWidth / aspectRatio;
   const shiftAmount = 200;
 
   return (
     <div
       ref={cardRef}
-      className="snap-center flex items-center justify-center h-screen"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="snap-center flex items-center justify-center h-full min-h-screen"
     >
       <div
-        className={`relative transition-all duration-700 ease-in-out ${inView ? "scale-100 opacity-100" : "scale-75 opacity-40"
-          }`}
+        className={`relative transition-all duration-700 ease-in-out ${inView ? "scale-100 opacity-100" : "scale-75 opacity-40"}`}
         style={{ width: `${cardWidth}px` }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
+
         {/* Project Counter - Top Right */}
         <div
-          className="absolute text-white text-2xl font-bold transition-all duration-500"
+          className="absolute text-black text-2xl font-bold transition-all duration-500"
           style={{
-            fontFamily: 'Ubuntu, sans-serif',
+            fontFamily: 'DM Sans, sans-serif',
             top: '-48px',
             right: isHovered ? `${shiftAmount}px` : '0px'
           }}
@@ -182,8 +185,8 @@ const ProjectCard = ({ project, index, totalProjects }) => {
           }}
         >
           <p
-            className="text-white text-base font-bold"
-            style={{ fontFamily: 'Ubuntu, sans-serif' }}
+            className="text-black text-base font-bold"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             {project.type}
           </p>
@@ -207,13 +210,13 @@ const ProjectCard = ({ project, index, totalProjects }) => {
                 transform: isHovered ? "scale(1.02)" : "scale(1)",
               }}
               onError={(e) => {
-                e.target.src = `data:image/svg+xml,%3Csvg width="1275" height="675" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="1275" height="675" fill="%23161b22"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%238b949e" font-size="48" font-family="Ubuntu"%3E${project.title}%3C/text%3E%3C/svg%3E`;
+                e.target.src = `data:image/svg+xml,%3Csvg width="1275" height="675" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="1275" height="675" fill="%23161b22"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%238b949e" font-size="48" font-family="DM Sans"%3E${project.title}%3C/text%3E%3C/svg%3E`;
               }}
             />
           </a>
         </div>
 
-        {/* White Separator Line */}
+        {/* Black Separator Line */}
         <div
           className="absolute transition-all duration-500"
           style={{
@@ -223,7 +226,7 @@ const ProjectCard = ({ project, index, totalProjects }) => {
             transformOrigin: 'top',
             width: '4px',
             height: `${cardHeight}px`,
-            background: 'white',
+            background: 'black',
             opacity: isHovered ? 1 : 0
           }}
         />
@@ -238,24 +241,24 @@ const ProjectCard = ({ project, index, totalProjects }) => {
             width: '300px',
             opacity: isHovered ? 1 : 0,
             pointerEvents: isHovered ? 'auto' : 'none',
-            marginTop: '16px'
+            marginTop: '8px'
           }}
         >
           <p
-            className="text-[#c9d1d9] text-sm leading-relaxed mb-4"
-            style={{ fontFamily: 'Ubuntu, sans-serif' }}
+            className="text-black text-sm leading-relaxed mb-4"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             {typedText}
             {isHovered && typedText.length < project.description.length && showCursor && (
-              <span className="text-blue-400">|</span>
+              <span className="text-black">|</span>
             )}
           </p>
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 bg-white/10 text-white text-xs border border-white/30"
-                style={{ fontFamily: 'Ubuntu, sans-serif' }}
+                className="px-3 py-1 bg-black/10 text-black text-xs border border-black/30"
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 {tag}
               </span>
@@ -275,8 +278,8 @@ const ProjectCard = ({ project, index, totalProjects }) => {
         >
           <a
             href={project.link}
-            className="text-3xl font-bold text-white hover:text-[#7dd3fc] transition-colors"
-            style={{ fontFamily: 'Ubuntu, sans-serif' }}
+            className="text-3xl font-bold text-black hover:text-black/70 transition-colors"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             {project.title}
           </a>
@@ -297,13 +300,13 @@ const AllProjectsButton = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className="relative px-6 py-3 border-2 border-white/20 transition-all duration-300 overflow-hidden"
+        className="relative px-6 py-3 border-2 border-black/20 transition-all duration-300 overflow-hidden"
         style={{
-          background: isHovered ? 'white' : 'black',
+          background: isHovered ? 'black' : 'transparent',
         }}
       >
         <div
-          className="absolute inset-0 bg-white transition-transform duration-300 origin-bottom"
+          className="absolute inset-0 bg-black transition-transform duration-300 origin-bottom"
           style={{
             transform: isHovered ? 'scaleY(1)' : 'scaleY(0)',
           }}
@@ -313,8 +316,8 @@ const AllProjectsButton = () => {
           <span
             className="text-sm font-bold transition-colors duration-300 whitespace-nowrap"
             style={{
-              fontFamily: 'Ubuntu, sans-serif',
-              color: isHovered ? 'black' : 'white'
+              fontFamily: 'DM Sans, sans-serif',
+              color: isHovered ? 'white' : 'black'
             }}
           >
             All Projects
@@ -323,7 +326,7 @@ const AllProjectsButton = () => {
           <svg
             className="w-3 h-3 transition-all duration-300"
             style={{
-              stroke: isHovered ? 'black' : 'white',
+              stroke: isHovered ? 'white' : 'black',
               transform: isHovered ? 'translate(2px, -2px)' : 'translate(0, 0)'
             }}
             fill="none"
