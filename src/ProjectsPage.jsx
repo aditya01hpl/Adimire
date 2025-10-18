@@ -41,9 +41,9 @@ const ProjectsPage = () => {
   ];
 
   const scrollContainerRef = useRef(null);
-//[#FF0050]
+
   return (
-    <div className="h-screen bg-[#FFFFFF] text-[#222222] flex items-start px-8 py-8 overflow-hidden">
+    <div className="h-screen bg-[#0F0F0F] text-[#F5F5F5] flex items-start px-8 py-8 overflow-hidden">
       
       {/* Max-width container with flex layout */}
       <div className="max-w-7xl mx-auto w-full flex items-start gap-12 h-full">
@@ -51,7 +51,7 @@ const ProjectsPage = () => {
         {/* Left Label: "WORK /" */}
         <div className="pt-1.5"> 
           <p 
-            className="text-m font-semibold text-[#222222] tracking-[0.2em] uppercase whitespace-nowrap"
+            className="text-m font-semibold text-[#8A8A8A] tracking-[0.2em] uppercase whitespace-nowrap"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             WORK /
@@ -164,7 +164,7 @@ const ProjectCard = ({ project, index, totalProjects }) => {
 
         {/* Project Counter - Top Right */}
         <div
-          className="absolute text-[#222222] text-2xl font-bold transition-all duration-500"
+          className="absolute text-[#8A8A8A] text-2xl font-bold transition-all duration-500"
           style={{
             fontFamily: 'DM Sans, sans-serif',
             top: '-48px',
@@ -185,7 +185,7 @@ const ProjectCard = ({ project, index, totalProjects }) => {
           }}
         >
           <p
-            className="text-black text-base font-bold"
+            className="text-[#8A8A8A] text-base font-bold"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             {project.type}
@@ -194,7 +194,7 @@ const ProjectCard = ({ project, index, totalProjects }) => {
 
         {/* Image */}
         <div
-          className="relative transition-all duration-500"
+          className="relative transition-all duration-500 border border-[#8A8A8A]"
           style={{
             width: `${cardWidth}px`,
             height: `${cardHeight}px`,
@@ -210,13 +210,13 @@ const ProjectCard = ({ project, index, totalProjects }) => {
                 transform: isHovered ? "scale(1.02)" : "scale(1)",
               }}
               onError={(e) => {
-                e.target.src = `data:image/svg+xml,%3Csvg width="1275" height="675" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="1275" height="675" fill="%23161b22"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%238b949e" font-size="48" font-family="DM Sans"%3E${project.title}%3C/text%3E%3C/svg%3E`;
+                e.target.src = `data:image/svg+xml,%3Csvg width="1275" height="675" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="1275" height="675" fill="%231A1A1A"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%238A8A8A" font-size="48" font-family="DM Sans"%3E${project.title}%3C/text%3E%3C/svg%3E`;
               }}
             />
           </a>
         </div>
 
-        {/* Black Separator Line */}
+        {/* Separator Line */}
         <div
           className="absolute transition-all duration-500"
           style={{
@@ -226,7 +226,7 @@ const ProjectCard = ({ project, index, totalProjects }) => {
             transformOrigin: 'top',
             width: '4px',
             height: `${cardHeight}px`,
-            background: 'black',
+            background: '#0066FF',
             opacity: isHovered ? 1 : 0
           }}
         />
@@ -245,19 +245,19 @@ const ProjectCard = ({ project, index, totalProjects }) => {
           }}
         >
           <p
-            className="text-[		#222222] text-m font-semibold leading-relaxed mb-4"
+            className="text-[#F5F5F5] text-m font-semibold leading-relaxed mb-4"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             {typedText}
             {isHovered && typedText.length < project.description.length && showCursor && (
-              <span className="text-[	#222222]">|</span>
+              <span className="text-[#0066FF]">|</span>
             )}
           </p>
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 bg-[#ADADAD] text-[#222222] text-xs font-semibold border border-[#222222]/90"
+                className="px-3 py-1 bg-transparent text-[#8A8A8A] text-xs font-semibold border border-[#8A8A8A]"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 {tag}
@@ -278,7 +278,7 @@ const ProjectCard = ({ project, index, totalProjects }) => {
         >
           <a
             href={project.link}
-            className="text-3xl font-bold text-[	#222222] hover:text-white/90 transition-colors"
+            className="text-3xl font-bold text-[#F5F5F5] hover:text-[#FF6B35] transition-colors"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             {project.title}
@@ -300,13 +300,14 @@ const AllProjectsButton = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className="relative px-6 py-3 border-2 border-[		#222222]/20 transition-all duration-300 overflow-hidden"
+        className="relative px-6 py-3 border-2 transition-all duration-300 overflow-hidden"
         style={{
-          background: isHovered ? 'black' : 'transparent',
+          borderColor: '#0066FF',
+          background: isHovered ? '#FF6B35' : 'transparent',
         }}
       >
         <div
-          className="absolute inset-0 bg-[	#222222] transition-transform duration-300 origin-bottom"
+          className="absolute inset-0 bg-[#FF6B35] transition-transform duration-300 origin-bottom"
           style={{
             transform: isHovered ? 'scaleY(1)' : 'scaleY(0)',
           }}
@@ -317,7 +318,7 @@ const AllProjectsButton = () => {
             className="text-sm font-bold transition-colors duration-300 whitespace-nowrap"
             style={{
               fontFamily: 'DM Sans, sans-serif',
-              color: isHovered ? 'white' : 'black'
+              color: isHovered ? 'white' : '#0066FF'
             }}
           >
             All Projects
@@ -326,7 +327,7 @@ const AllProjectsButton = () => {
           <svg
             className="w-3 h-3 transition-all duration-300"
             style={{
-              stroke: isHovered ? 'white' : 'black',
+              stroke: isHovered ? 'white' : '#0066FF',
               transform: isHovered ? 'translate(2px, -2px)' : 'translate(0, 0)'
             }}
             fill="none"

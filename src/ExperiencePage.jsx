@@ -75,14 +75,14 @@ const ExperiencePage = () => {
   const [selectedExp, setSelectedExp] = useState(null);
 
   return (
-    <div className="h-screen bg-[#fff5d7] text-white flex items-start px-8 py-8 overflow-hidden">
+    <div className="h-screen bg-[#0F0F0F] text-white flex items-start px-8 py-8 overflow-hidden">
       {/* Max-width container with flex layout */}
       <div className="max-w-7xl mx-auto w-full flex items-start gap-8 h-full">
         
         {/* Left Label: "EXPERIENCE /" */}
         <div className="pt-1.5"> 
           <p 
-            className="text-m font-semibold text-white/60 tracking-[0.2em] uppercase whitespace-nowrap"
+            className="text-m font-semibold text-[#8A8A8A] tracking-[0.2em] uppercase whitespace-nowrap"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             EXPERIENCE /
@@ -111,7 +111,7 @@ const ExperiencePage = () => {
                 {/* Separator Line in middle of gap between cards */}
                 {index < experiences.length - 1 && (
                   <div className="flex justify-center">
-                    <div className="w-full h-px bg-white/30"></div>
+                    <div className="w-full h-px bg-[#8A8A8A]"></div>
                   </div>
                 )}
               </React.Fragment>
@@ -127,21 +127,21 @@ const ExperiencePage = () => {
           onClick={() => setSelectedExp(null)}
         >
           <div
-            className="bg-white text-black rounded-2xl p-6 w-[700px] max-h-[80vh] overflow-y-auto shadow-2xl relative"
+            className="bg-[#1A1A1A] text-[#F5F5F5] rounded-2xl p-6 w-[700px] max-h-[80vh] overflow-y-auto shadow-2xl relative border border-[#8A8A8A]"
             onClick={(e) => e.stopPropagation()}
           >
             <h2
-              className="text-xl font-bold mb-2 text-[#3294DA]"
+              className="text-xl font-bold mb-2 text-[#0066FF]"
               style={{ fontFamily: "DM Sans, sans-serif" }}
             >
               {selectedExp.company}
             </h2>
-            <p className="text-sm text-black/70 mb-4">
+            <p className="text-sm text-[#8A8A8A] mb-4">
               {selectedExp.role} • {selectedExp.duration}
             </p>
 
             <h4
-              className="text-sm font-bold text-black mb-3 uppercase tracking-wider"
+              className="text-sm font-bold text-[#F5F5F5] mb-3 uppercase tracking-wider"
               style={{ fontFamily: "DM Sans, sans-serif" }}
             >
               Responsibilities
@@ -150,20 +150,20 @@ const ExperiencePage = () => {
               {selectedExp.responsibilities.map((item, i) => (
                 <li
                   key={i}
-                  className="flex items-start gap-2 text-xs text-black/70 leading-relaxed"
+                  className="flex items-start gap-2 text-xs text-[#8A8A8A] leading-relaxed"
                   style={{ fontFamily: "DM Sans, sans-serif" }}
                 >
-                  <span className="text-[#3294DA] mt-1 flex-shrink-0">•</span>
+                  <span className="text-[#0066FF] mt-1 flex-shrink-0">•</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="flex flex-wrap gap-2 pt-3 border-t border-black/10">
+            <div className="flex flex-wrap gap-2 pt-3 border-t border-[#8A8A8A]">
               {selectedExp.skills.map((skill, i) => (
                 <span
                   key={i}
-                  className="px-2 py-1 bg-[#3294DA]/10 text-[#3294DA] text-[10px] font-bold border border-[#3294DA]/30 rounded"
+                  className="px-2 py-1 bg-transparent text-[#0066FF] text-[10px] font-bold border border-[#0066FF] rounded"
                   style={{ fontFamily: "DM Sans, sans-serif" }}
                 >
                   {skill}
@@ -173,7 +173,7 @@ const ExperiencePage = () => {
 
             <button
               onClick={() => setSelectedExp(null)}
-              className="absolute top-4 right-4 text-[#3294DA] text-sm font-bold"
+              className="absolute top-4 right-4 text-[#0066FF] text-sm font-bold hover:text-[#FF6B35] transition-colors"
             >
               ✕
             </button>
@@ -199,7 +199,7 @@ const ExperienceCard = ({ experience, onOpen }) => {
 
   return (
     <div
-      className="bg-[#ff5e6c] text-black p-3 shadow-md transition-all duration-500 hover:shadow-xl hover:-translate-y-1"
+      className="bg-[#1A1A1A] text-[#F5F5F5] p-3 shadow-md transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-[#8A8A8A]"
       style={{
         fontFamily: "DM Sans, sans-serif",
         minHeight: "100px",
@@ -212,20 +212,20 @@ const ExperienceCard = ({ experience, onOpen }) => {
           <div className="w-[22%] flex flex-col justify-end items-center">
             {/* Company Logo */}
             <div className="mb-2">
-              <div className="w-28 h-18 bg-gray-200 flex items-center justify-center overflow-hidden">
+              <div className="w-28 h-18 bg-[#0066FF] flex items-center justify-center overflow-hidden rounded">
                 <img
                   src={experience.logo}
                   alt={experience.company}
                   className="w-full h-full object-contain"
                   onError={(e) => {
-                    e.target.src = `data:image/svg+xml,%3Csvg width="48" height="48" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="48" height="48" fill="%233294DA"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="16" font-family="DM Sans" font-weight="bold" dy=".3em"%3E${experience.company.charAt(0)}%3C/text%3E%3C/svg%3E`;
+                    e.target.src = `data:image/svg+xml,%3Csvg width="48" height="48" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="48" height="48" fill="%230066FF"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="16" font-family="DM Sans" font-weight="bold" dy=".3em"%3E${experience.company.charAt(0)}%3C/text%3E%3C/svg%3E`;
                   }}
                 />
               </div>
             </div>
             
-            <h3 className="text-m font-bold leading-tight text-center">{experience.company}</h3>
-            <p className="text-sm font-semibold italic underline text-black leading-tight mt-1 text-center">
+            <h3 className="text-m font-bold leading-tight text-center text-[#F5F5F5]">{experience.company}</h3>
+            <p className="text-sm font-semibold italic text-[#8A8A8A] leading-tight mt-1 text-center">
               {experience.role}
             </p>
           </div>
@@ -233,7 +233,7 @@ const ExperienceCard = ({ experience, onOpen }) => {
         {/* Right Section: Description and Duration (75-80%) */}
         <div className="flex-1 flex justify-between items-start">
           <div className="flex-1 mr-8">
-            <p className="text-m text-black font-normal leading-relaxed">
+            <p className="text-m text-[#F5F5F5] font-normal leading-relaxed">
               {experience.description}
             </p>
             
@@ -246,7 +246,7 @@ const ExperienceCard = ({ experience, onOpen }) => {
               >
                 <button
                   onClick={onOpen}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-black text-white text-xs font-semibold rounded-full hover:bg-[#1d6fbf]"
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0066FF] text-white text-xs font-semibold rounded-full hover:bg-[#FF6B35] transition-colors"
                 >
                   <ClipboardList size={14} />
                   Details
@@ -255,7 +255,7 @@ const ExperienceCard = ({ experience, onOpen }) => {
                   href={experience.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white text-[#3294DA] text-xs font-semibold border border-[#3294DA] rounded-full hover:bg-[#3294DA] hover:text-white"
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-transparent text-[#0066FF] text-xs font-semibold border border-[#0066FF] rounded-full hover:bg-[#0066FF] hover:text-white transition-all"
                 >
                   Website <ArrowUpRight size={14} />
                 </a>
@@ -263,7 +263,7 @@ const ExperienceCard = ({ experience, onOpen }) => {
             </div>
           </div>
           
-          <p className="text-s text-black/100 font-medium whitespace-nowrap ml-4">
+          <p className="text-s text-[#8A8A8A] font-medium whitespace-nowrap ml-4">
             {experience.duration}
           </p>
         </div>
