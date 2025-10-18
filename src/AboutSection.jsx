@@ -3,7 +3,7 @@ import React from 'react';
 const AboutSection = () => {
   return (
     // Main Container: Dark theme, full screen height, centered content
-    <div className="h-screen bg-black text-white flex items-center px-8">
+    <div className="h-screen bg-[#171717] text-white flex items-center px-8">
       
       {/* Max-width container with a flex layout for the two main columns */}
       <div className="max-w-7xl mx-auto w-full flex items-start gap-12">

@@ -41,9 +41,9 @@ const ProjectsPage = () => {
   ];
 
   const scrollContainerRef = useRef(null);
-
+//[#FF0050]
   return (
-    <div className="h-screen bg-[#FF0050] text-black flex items-start px-8 py-8 overflow-hidden">
+    <div className="h-screen bg-[#FFFFFF] text-[#222222] flex items-start px-8 py-8 overflow-hidden">
       
       {/* Max-width container with flex layout */}
       <div className="max-w-7xl mx-auto w-full flex items-start gap-12 h-full">
@@ -51,7 +51,7 @@ const ProjectsPage = () => {
         {/* Left Label: "WORK /" */}
         <div className="pt-1.5"> 
           <p 
-            className="text-m font-semibold text-black/60 tracking-[0.2em] uppercase whitespace-nowrap"
+            className="text-m font-semibold text-[#222222] tracking-[0.2em] uppercase whitespace-nowrap"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             WORK /
@@ -164,7 +164,7 @@ const ProjectCard = ({ project, index, totalProjects }) => {
 
         {/* Project Counter - Top Right */}
         <div
-          className="absolute text-black text-2xl font-bold transition-all duration-500"
+          className="absolute text-[#222222] text-2xl font-bold transition-all duration-500"
           style={{
             fontFamily: 'DM Sans, sans-serif',
             top: '-48px',
@@ -245,19 +245,19 @@ const ProjectCard = ({ project, index, totalProjects }) => {
           }}
         >
           <p
-            className="text-black text-sm leading-relaxed mb-4"
+            className="text-[		#222222] text-m font-semibold leading-relaxed mb-4"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             {typedText}
             {isHovered && typedText.length < project.description.length && showCursor && (
-              <span className="text-black">|</span>
+              <span className="text-[	#222222]">|</span>
             )}
           </p>
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 bg-black/10 text-black text-xs border border-black/30"
+                className="px-3 py-1 bg-[#ADADAD] text-[#222222] text-xs font-semibold border border-[#222222]/90"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 {tag}
@@ -278,7 +278,7 @@ const ProjectCard = ({ project, index, totalProjects }) => {
         >
           <a
             href={project.link}
-            className="text-3xl font-bold text-black hover:text-black/70 transition-colors"
+            className="text-3xl font-bold text-[	#222222] hover:text-white/90 transition-colors"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             {project.title}
@@ -300,13 +300,13 @@ const AllProjectsButton = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className="relative px-6 py-3 border-2 border-black/20 transition-all duration-300 overflow-hidden"
+        className="relative px-6 py-3 border-2 border-[		#222222]/20 transition-all duration-300 overflow-hidden"
         style={{
           background: isHovered ? 'black' : 'transparent',
         }}
       >
         <div
-          className="absolute inset-0 bg-black transition-transform duration-300 origin-bottom"
+          className="absolute inset-0 bg-[	#222222] transition-transform duration-300 origin-bottom"
           style={{
             transform: isHovered ? 'scaleY(1)' : 'scaleY(0)',
           }}
