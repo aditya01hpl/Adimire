@@ -7,10 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && git add dist -f && git commit -m \"Deploy\" && git push origin dev:gh-pages"
   },
   "dependencies": {
     "framer-motion": "^12.23.22",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.546.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"

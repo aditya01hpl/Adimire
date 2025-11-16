@@ -1,271 +1,194 @@
 import React, { useState } from "react";
-import { ArrowUpRight, ClipboardList } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const ExperiencePage = () => {
   const experiences = [
     {
       id: 1,
       logo: "cloudbox4.jpg",
+      place:"CBT.jfif",
       company: "Cloudbox AI",
-      role: "Senior Full Stack Developer",
-      duration: "2022 - Present",
+      role: "AI Engineer",
+      duration: "Sept 2025 - Present",
       description:
-        "Leading development of enterprise applications and mentoring junior developers in modern web technologies.",
-      website: "https://techcorp.com",
+        "CloudBox AI is a leading system integrator that unifies diverse technologies and AI-driven platforms into intelligent, future-ready business solutions, helping companies grow smarter and more secure.",
+      website: "https://cbtait.com/",
       responsibilities: [
-        "Architected and developed scalable microservices using Node.js and React",
-        "Led a team of 5 developers in agile development practices",
-        "Improved application performance by 40% through optimization",
-        "Implemented CI/CD pipelines reducing deployment time by 60%",
+        "Developed and deployed AI backend for Zuuz using Go, gRPC, and Docker on Kubernetes, ensuring smooth and low-latency model inference.",
+        "Built the end-to-end data pipeline that ingests multi-source signals (MS Graph, webhooks, MinIO, and Kafka), performs enrichment and batching in Python workers, and serves contextual summaries to downstream models via protobufs and gRPC.",
+        "Productionized model serving with ONNX Runtime and async batching, cutting inference time and cost.",
+        "Contributed to CI/CD, logging, and monitoring setup using GitHub Actions, Prometheus, and Grafana for better system reliability.",
       ],
-      skills: ["React", "Node.js", "AWS", "Docker", "PostgreSQL"],
+      skills: ["Go", "gRPC", "Docker", "Kubernetes", "Python", "Kafka", "ONNX Runtime", "Prometheus", "CI/CD"],
     },
     {
       id: 2,
       logo: "sphereglobal.jpg",
+      place:"sphere.jfif",
       company: "Sphere Global",
-      role: "Full Stack Developer",
-      duration: "2020 - 2022",
+      role: "AI Engineer",
+      duration: "Sept 2024 - Sept 2025",
       description:
-        "Developed and maintained multiple client-facing web applications with focus on user experience and performance.",
-      website: "https://digitalsolutions.com",
+        "SphereGlobal is a technology company specializing in AI-powered optimization and autonomous inspection solutions for complex logistics and supply chain operations, trusted by industry leaders like FedEx, Ford, and Enterprise.",
+      website: "https://sphereglobal.com/",
       responsibilities: [
-        "Built responsive web applications using React and TypeScript",
-        "Designed and implemented RESTful APIs with Express.js",
-        "Collaborated with UX team to improve user engagement by 35%",
-        "Mentored 3 junior developers and conducted code reviews",
+        "Developed a Qwen2.5-based LLM chatbot trained on 10K+ inspection reports, enabling natural language damage analysis.",
+        "Built and deployed a YOLOv8-OBB vision system for VIN detection, cutting processing time by more than half.",
+        "Automated data extraction workflows with Phi-3 mini and spaCy NER, reducing manual review time by 85%.",
+        "Led backend architecture design using FastAPI and async pipelines, ensuring robust performance under real-time load.",
       ],
-      skills: ["React", "TypeScript", "Express.js", "MongoDB", "Git"],
+      skills: ["FastAPI", "PyTorch", "YOLOv8", "spaCy", "Qwen2.5", "PostgreSQL", "Docker", "LangChain"],
     },
     {
       id: 3,
       logo: "forbes1.jpg",
+      place:"FA.jfif",
       company: "Forbes Advisor",
-      role: "Frontend Developer",
-      duration: "2018 - 2020",
+      role: "Data Analyst Intern",
+      duration: "Jan 2024 - Jun 2024",
       description:
-        "Created innovative user interfaces for startup products, focusing on modern design patterns and accessibility.",
-      website: "https://startuplabs.com",
+        "Forbes Advisor is a global platform providing unbiased personal finance advice, news, reviews, and a comparison marketplace to help consumers make confident financial decisions across credit cards, loans, insurance, investing, and more.",
+      website: "https://www.forbes.com/advisor/",
       responsibilities: [
-        "Developed pixel-perfect UIs from Figma designs",
-        "Implemented state management using Redux",
-        "Optimized web vitals achieving 95+ Lighthouse scores",
-        "Worked directly with founders on product strategy",
+        "Deployed GA4 + GTM tracking across marketplace pages to map engagement and user behavior.",
+        "Automated BigQuery pipelines for daily analytics, unlocking cross-platform insights with near-real-time data.",
+        "Designed and maintained dashboards for executives, streamlining weekly and monthly reporting.",
       ],
-      skills: ["JavaScript", "React", "Redux", "CSS3", "Webpack"],
+      skills: ["Google Analytics 4", "GTM", "BigQuery", "SQL", "Python", "Data Studio", "ETL Pipelines"],
     },
     {
       id: 4,
       logo: "hofinsoft1.jpg",
+      place:"hofinsoft.jfif",
       company: "Hofinsoft",
-      role: "Software Engineer Intern",
-      duration: "2017 - 2018",
+      role: "NLP Intern",
+      duration: "Aug 2021 - Mar 2022",
       description:
-        "Assisted in developing internal tools and automation scripts improving productivity across teams.",
+        "Hofinsoft Technologies is a Chennai-based leader in Enterprise Asset Management and Supply Chain Effectiveness, specializing in MRO-centric master data management, governance, and consulting services for asset-heavy industries like oil & gas, manufacturing, and energy.",
       website: "https://cloudworks.com",
       responsibilities: [
-        "Developed automation scripts using Python",
-        "Created internal dashboards for analytics",
-        "Worked with DevOps to streamline deployments",
+        "Built NLP models for analyzing user feedback, improving processing efficiency and data clarity.",
+        "Trained a Bi-LSTM entity-relationship extractor to identify hardware components and their attributes.",
+        "Designed preprocessing workflows for structured and unstructured text, cutting model training time by 25%.",
       ],
-      skills: ["Python", "Flask", "SQL", "Git", "Docker"],
+      skills: ["Python", "TensorFlow", "Bi-LSTM", "NLP", "Pandas", "scikit-learn", "Data Preprocessing"],
     },
   ];
 
-  const [selectedExp, setSelectedExp] = useState(null);
+  const [hoveredId, setHoveredId] = useState(null);
 
   return (
-    <div className="h-screen bg-[#0F0F0F] text-white flex items-start px-8 py-8 overflow-hidden">
-      {/* Max-width container with flex layout */}
-      <div className="max-w-7xl mx-auto w-full flex items-start gap-8 h-full">
-        
-        {/* Left Label: "EXPERIENCE /" */}
-        <div className="pt-1.5"> 
-          <p 
-            className="text-m font-semibold text-[#8A8A8A] tracking-[0.2em] uppercase whitespace-nowrap"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
-          >
+    <div id="experience-section" className="h-screen bg-black text-white flex items-start px-8 py-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full flex items-start gap-28 h-full">
+        <div className="pt-2">
+          <p className="text-m font-semibold text-[#8A8A8A] tracking-[0.2em] uppercase whitespace-nowrap" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             EXPERIENCE /
           </p>
         </div>
-
-        {/* Main Content Area - Scrollable Cards */}
-        <div 
-          className="flex-1 h-full overflow-y-auto pl-8"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          <style>{`
-            .flex-1::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
-
-          {/* Experience Cards */}
-          <div className="space-y-4">
+        <div className="flex-1 h-full overflow-y-auto pl-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <style>{`.flex-1::-webkit-scrollbar { display: none; }`}</style>
+          <div className="space-y-6">
             {experiences.map((exp, index) => (
               <React.Fragment key={exp.id}>
-                <ExperienceCard
-                  experience={exp}
-                  onOpen={() => setSelectedExp(exp)}
-                />
-                {/* Separator Line in middle of gap between cards */}
-                {index < experiences.length - 1 && (
-                  <div className="flex justify-center">
-                    <div className="w-full h-px bg-[#8A8A8A]"></div>
+                <div
+                  className={`transition-all duration-700 ease-out ${hoveredId === exp.id ? "pb-6" : "pb-0"}`}
+                >
+                  <div className="flex gap-6 items-start">
+                    {/* Left section: Logo, Company, Role, Duration */}
+                    <div className="w-36 flex flex-col items-center pt-1">
+                      <img
+                        src={exp.logo}
+                        alt={exp.company}
+                        className="w-28 h-16 object-contain bg-black"
+                        style={{ borderRadius: 0, border: 'none' }}
+                      />
+                      <h3 className="text-lg font-bold text-center text-white " style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                        {exp.company}
+                      </h3>
+                      <p className="text-base text-[#8A8A8A] text-center mt-0.5" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                        {exp.role}
+                      </p>
+
+                    </div>
+
+                    {/* Right section: Description or expanded info on hover */}
+                    <div
+                      className="flex-1 pl-6"
+                      onMouseEnter={() => setHoveredId(exp.id)}
+                      onMouseLeave={() => setHoveredId(null)}
+                    >
+                      <div
+                        className={`transition-all duration-700 ease-out rounded-xl p-6 ${hoveredId === exp.id
+                          ? "bg-black text-white scale-[1.01] ring-1 ring-white/15"
+                          : "bg-black text-white scale-100 ring-0"
+                          }`}
+                        style={{ willChange: 'transform, opacity' }}
+                      >
+                        {hoveredId !== exp.id ? (
+                          // Initial state: Description with duration on same line
+                          <div style={{ fontFamily: 'DM Sans, sans-serif' }} className="transition-all duration-500 ease-out opacity-100">
+                            <p className="text-base leading-relaxed">
+                              {exp.description.split(' ').slice(0, -4).join(' ')}
+                              <span className="float-right ml-4 text-[#8A8A8A]">{exp.duration}</span>
+                              {' ' + exp.description.split(' ').slice(-4).join(' ')}
+                            </p>
+                          </div>
+                        ) : (
+                          // Hover state: Full info with image
+                          <div className="flex gap-8" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                            <div className="flex-1 transition-all duration-500 ease-out translate-y-0 opacity-100">
+                              <h4 className="text-base font-bold mb-3 uppercase tracking-wider">
+                                Responsibilities
+                              </h4>
+                              <ul className="list-disc list-inside space-y-2 text-sm mb-4">
+                                {exp.responsibilities.map((item, i) => (
+                                  <li key={i}>{item}</li>
+                                ))}
+                              </ul>
+                              <div className="flex flex-wrap gap-2 pt-3 mb-4 border-t border-white/20">
+                                {exp.skills.map((skill, i) => (
+                                  <span
+                                    key={i}
+                                    className="px-2 py-1 bg-transparent text-white text-xs font-bold border border-white/60 rounded"
+                                  >
+                                    {skill}
+                                  </span>
+                                ))}
+                              </div>
+                              <a
+                                href={exp.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-4 py-2 border-2 border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-all duration-300"
+                              >
+                                Website <ArrowUpRight size={16} />
+                              </a>
+                            </div>
+                            {/* Image placeholder */}
+                            <div className="w-44 flex items-center justify-center">
+                            <img
+                                  src={exp.place}
+                                  alt={exp.company}
+                                  className="w-full h-40 object-cover border-2 border-dashed border-gray-400 rounded-lg transition-all duration-500 ease-out"
+                                  style={{
+                                    opacity: hoveredId === exp.id ? 1 : 0,
+                                    transform: hoveredId === exp.id ? 'translateY(0)' : 'translateY(8px)'
+                                  }}
+                                />
+
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
+                </div>
+                {index < experiences.length - 1 && (
+                  <div className="w-full h-px bg-white my-6"></div>
                 )}
               </React.Fragment>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Modal */}
-      {selectedExp && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 animate-fadeIn"
-          onClick={() => setSelectedExp(null)}
-        >
-          <div
-            className="bg-[#1A1A1A] text-[#F5F5F5] rounded-2xl p-6 w-[700px] max-h-[80vh] overflow-y-auto shadow-2xl relative border border-[#8A8A8A]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2
-              className="text-xl font-bold mb-2 text-[#0066FF]"
-              style={{ fontFamily: "DM Sans, sans-serif" }}
-            >
-              {selectedExp.company}
-            </h2>
-            <p className="text-sm text-[#8A8A8A] mb-4">
-              {selectedExp.role} • {selectedExp.duration}
-            </p>
-
-            <h4
-              className="text-sm font-bold text-[#F5F5F5] mb-3 uppercase tracking-wider"
-              style={{ fontFamily: "DM Sans, sans-serif" }}
-            >
-              Responsibilities
-            </h4>
-            <ul className="space-y-2 mb-4">
-              {selectedExp.responsibilities.map((item, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-2 text-xs text-[#8A8A8A] leading-relaxed"
-                  style={{ fontFamily: "DM Sans, sans-serif" }}
-                >
-                  <span className="text-[#0066FF] mt-1 flex-shrink-0">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex flex-wrap gap-2 pt-3 border-t border-[#8A8A8A]">
-              {selectedExp.skills.map((skill, i) => (
-                <span
-                  key={i}
-                  className="px-2 py-1 bg-transparent text-[#0066FF] text-[10px] font-bold border border-[#0066FF] rounded"
-                  style={{ fontFamily: "DM Sans, sans-serif" }}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-
-            <button
-              onClick={() => setSelectedExp(null)}
-              className="absolute top-4 right-4 text-[#0066FF] text-sm font-bold hover:text-[#FF6B35] transition-colors"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
-
-      <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: scale(0.95); }
-          to { opacity: 1; transform: scale(1); }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out forwards;
-        }
-      `}</style>
-    </div>
-  );
-};
-
-const ExperienceCard = ({ experience, onOpen }) => {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div
-      className="bg-[#1A1A1A] text-[#F5F5F5] p-3 shadow-md transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-[#8A8A8A]"
-      style={{
-        fontFamily: "DM Sans, sans-serif",
-        minHeight: "100px",
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <div className="flex gap-8">
-        {/* Left Section: Company Logo, Name and Role (20-25%) */}
-          <div className="w-[22%] flex flex-col justify-end items-center">
-            {/* Company Logo */}
-            <div className="mb-2">
-              <div className="w-28 h-18 bg-[#0066FF] flex items-center justify-center overflow-hidden rounded">
-                <img
-                  src={experience.logo}
-                  alt={experience.company}
-                  className="w-full h-full object-contain"
-                  onError={(e) => {
-                    e.target.src = `data:image/svg+xml,%3Csvg width="48" height="48" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="48" height="48" fill="%230066FF"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="16" font-family="DM Sans" font-weight="bold" dy=".3em"%3E${experience.company.charAt(0)}%3C/text%3E%3C/svg%3E`;
-                  }}
-                />
-              </div>
-            </div>
-            
-            <h3 className="text-m font-bold leading-tight text-center text-[#F5F5F5]">{experience.company}</h3>
-            <p className="text-sm font-semibold italic text-[#8A8A8A] leading-tight mt-1 text-center">
-              {experience.role}
-            </p>
-          </div>
-
-        {/* Right Section: Description and Duration (75-80%) */}
-        <div className="flex-1 flex justify-between items-start">
-          <div className="flex-1 mr-8">
-            <p className="text-m text-[#F5F5F5] font-normal leading-relaxed">
-              {experience.description}
-            </p>
-            
-            {/* Buttons on hover - positioned where description starts */}
-            <div className="mt-3">
-              <div
-                className={`flex gap-3 transition-all duration-500 ${
-                  hovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-                }`}
-              >
-                <button
-                  onClick={onOpen}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0066FF] text-white text-xs font-semibold rounded-full hover:bg-[#FF6B35] transition-colors"
-                >
-                  <ClipboardList size={14} />
-                  Details
-                </button>
-                <a
-                  href={experience.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-transparent text-[#0066FF] text-xs font-semibold border border-[#0066FF] rounded-full hover:bg-[#0066FF] hover:text-white transition-all"
-                >
-                  Website <ArrowUpRight size={14} />
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <p className="text-s text-[#8A8A8A] font-medium whitespace-nowrap ml-4">
-            {experience.duration}
-          </p>
         </div>
       </div>
     </div>

@@ -1,56 +1,57 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+
 const ProjectsPage = () => {
   const projects = [
     {
       id: 1,
-      title: "Sparrows of Luck",
-      type: "Gaming",
-      description: "Mobile gaming application with engaging gameplay mechanics and stunning visuals. Built for iOS and Android platforms with seamless cross-platform experience.",
-      image: "project1.jpg",
-      tags: ["Mobile", "React Native", "Gaming"],
-      link: "#"
+      title: "Inspectra",
+      type: "Fleet Management",
+      description: "A AI powered Vehicle Inspection Chatbot system that answers queries about inspection data using both SQL and semantic search. It integrates PostgreSQL, FAISS, and Ollama (Qwen LLM) to understand user queries, find relevant records, and generate clear, natural language responses via a FastAPI web service or CLI, ensuring efficient vehicle data insights.",
+      image: "src/assets/Project1/image4.png",
+      tags: ["LLM", "Ollama", "FastAPI", "PostgreSQL", "FAISS", "Docker", "RAG"],
+      link: "https://github.com/aditya01hpl/Inspectra"
     },
     {
       id: 2,
-      title: "Radio Rocks",
-      type: "Music Platform",
-      description: "Interactive music voting platform allowing users to vote for favorite songs. Real-time audio streaming with social engagement features and playlist curation.",
-      image: "project2.jpg",
-      tags: ["Web App", "Streaming", "UI/UX"],
-      link: "#"
+      title: "Pulse",
+      type: "Recommendation Serving Platform",
+      description: "A local production-like system to serve multiple recommendation models with canary deployment and AB testing, using FastAPI, MLflow, PostgreSQL, Prometheus-Grafana monitoring, and automated promotion/rollback via Celery-Redis and Docker Compose orchestration.",
+      image: "src/assets/Project2/Project2.png",
+      tags: ["Canary deployment", "AB testing", "MLflow ","FastAPI","Docker","Prometheus-Grafana","Celery-Redis"],
+      link: "https://github.com/aditya01hpl/Pulse"
     },
     {
       id: 3,
-      title: "E-Commerce Platform",
-      type: "Retail",
-      description: "Full-featured online marketplace with inventory management, payment processing, and customer analytics. Scalable architecture handling thousands of transactions.",
-      image: "project3.jpg",
-      tags: ["E-Commerce", "Backend", "Cloud"],
-      link: "#"
+      title: "Cipher",
+      type: "Knowledge Management",
+      description: "A multimodal RAG chatbot for technical PDF QA, enabling semantic search and retrieval across text, images, tables, and formulas using Vision-Language and Large Language Models. Integrated with MinerU, LlamaIndex, and Streamlit for end-to-end document parsing, indexing, and user interaction.",
+      image: "src/assets/Project3/image.png",
+      tags: ["VLM", "Multimodal RAG", "LlamaIndex", "OCR","MinerU"],
+      link: "https://github.com/aditya01hpl/Cipher"
     },
     {
       id: 4,
-      title: "Analytics Dashboard",
-      type: "Data Visualization",
-      description: "Real-time analytics platform with interactive charts and custom reporting. Enterprise-grade data processing with intuitive user interface.",
-      image: "project4.jpg",
-      tags: ["Dashboard", "React", "D3.js"],
-      link: "#"
+      title: "Carnisight",
+      type: "Food Technology",
+      description: "Carnisight is an IoT and XAI-based system for real-time meat quality classification and distribution, using transfer learning (MobileNetV1), ESP32-CAM imaging, and Grad-CAM interpretability to connect suppliers with NGOs and reduce waste.",
+      image: "src/assets/Project4/Project4.png",
+      tags: ["Computer Vision","Image Processing", "XAI","Transfer Learning", "React", "D3.js"],
+      link: "https://drive.google.com/file/d/1eQFUdPwiZ9y141Sja0NfE4dfvwfDsBl5/view?usp=sharing"
     }
   ];
 
   const scrollContainerRef = useRef(null);
 
   return (
-    <div className="h-screen bg-[#0F0F0F] text-[#F5F5F5] flex items-start px-8 py-8 overflow-hidden">
-      
+    <div id="works-section" className="h-screen bg-black text-white flex items-start px-8 py-8 overflow-hidden">
+
       {/* Max-width container with flex layout */}
       <div className="max-w-7xl mx-auto w-full flex items-start gap-12 h-full">
-        
+
         {/* Left Label: "WORK /" */}
-        <div className="pt-1.5"> 
-          <p 
+        <div className="pt-1.5">
+          <p
             className="text-m font-semibold text-[#8A8A8A] tracking-[0.2em] uppercase whitespace-nowrap"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
@@ -59,7 +60,7 @@ const ProjectsPage = () => {
         </div>
 
         {/* Main Content Area - Scrollable */}
-        <div 
+        <div
           ref={scrollContainerRef}
           className="flex-1 h-full overflow-y-auto snap-y snap-mandatory"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -90,7 +91,7 @@ const ProjectsPage = () => {
 };
 
 const ProjectCard = ({ project, index, totalProjects }) => {
-  
+
   const [typedText, setTypedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
   const typingRef = useRef(null);
@@ -194,26 +195,17 @@ const ProjectCard = ({ project, index, totalProjects }) => {
 
         {/* Image */}
         <div
-          className="relative transition-all duration-500 border border-[#8A8A8A]"
+          className="relative transition-all duration-500 border-2 border-white bg-black rounded-lg overflow-hidden group mx-auto mt-4 mb-6 shadow-lg"
           style={{
             width: `${cardWidth}px`,
             height: `${cardHeight}px`,
             transform: isHovered ? `translateX(-${shiftAmount}px)` : 'translateX(0)',
           }}
         >
-          <a href={project.link} className="block w-full h-full">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500"
-              style={{
-                transform: isHovered ? "scale(1.02)" : "scale(1)",
-              }}
-              onError={(e) => {
-                e.target.src = `data:image/svg+xml,%3Csvg width="1275" height="675" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="1275" height="675" fill="%231A1A1A"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%238A8A8A" font-size="48" font-family="DM Sans"%3E${project.title}%3C/text%3E%3C/svg%3E`;
-              }}
-            />
-          </a>
+          <div className="flex items-center justify-center w-full h-full">
+            <img src={project.image} alt={project.title} className="object-contain" />
+          </div>
+
         </div>
 
         {/* Separator Line */}
@@ -226,7 +218,7 @@ const ProjectCard = ({ project, index, totalProjects }) => {
             transformOrigin: 'top',
             width: '4px',
             height: `${cardHeight}px`,
-            background: '#0066FF',
+            background: 'white',
             opacity: isHovered ? 1 : 0
           }}
         />
@@ -278,6 +270,8 @@ const ProjectCard = ({ project, index, totalProjects }) => {
         >
           <a
             href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-3xl font-bold text-[#F5F5F5] hover:text-[#FF6B35] transition-colors"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
@@ -294,17 +288,15 @@ const AllProjectsButton = () => {
 
   return (
     <a
-      href="#"
+      href="https://github.com/aditya01hpl"
+      target="_blank"
+      rel="noopener noreferrer"
       className="relative group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className="relative px-6 py-3 border-2 transition-all duration-300 overflow-hidden"
-        style={{
-          borderColor: '#0066FF',
-          background: isHovered ? '#FF6B35' : 'transparent',
-        }}
+        className="relative px-6 py-3 border-2 border-white transition-all duration-300 overflow-hidden group hover:bg-white hover:text-black" style={{ background: isHovered ? 'white' : 'transparent' }}
       >
         <div
           className="absolute inset-0 bg-[#FF6B35] transition-transform duration-300 origin-bottom"
@@ -314,27 +306,8 @@ const AllProjectsButton = () => {
         />
 
         <div className="relative flex items-center gap-3">
-          <span
-            className="text-sm font-bold transition-colors duration-300 whitespace-nowrap"
-            style={{
-              fontFamily: 'DM Sans, sans-serif',
-              color: isHovered ? 'white' : '#0066FF'
-            }}
-          >
-            All Projects
-          </span>
-
-          <svg
-            className="w-3 h-3 transition-all duration-300"
-            style={{
-              stroke: isHovered ? 'white' : '#0066FF',
-              transform: isHovered ? 'translate(2px, -2px)' : 'translate(0, 0)'
-            }}
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
-          </svg>
+          <span className="text-lg font-bold transition-colors duration-300 whitespace-nowrap" style={{ fontFamily: 'DM Sans, sans-serif', color: isHovered ? 'black' : 'white' }}>All Projects</span>
+          <svg className="w-4 h-4 transition-all duration-300" style={{ stroke: isHovered ? 'black' : 'white', transform: isHovered ? 'translate(2px, -2px)' : 'translate(0, 0)' }} fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" /></svg>
         </div>
       </div>
     </a>

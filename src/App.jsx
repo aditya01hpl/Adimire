@@ -10,7 +10,7 @@ import ContactPage from './ContactPage';  // Add this line
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
 
-    useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       const heroSection = document.getElementById('hero-section');
       const aboutSection = document.getElementById('about-section');
@@ -18,7 +18,7 @@ const App = () => {
       const experienceSection = document.getElementById('experience-section');
       const articlesSection = document.getElementById('articles-section');
       const contactSection = document.getElementById('contact-section');  // Add this line
-      
+
       if (heroSection && aboutSection && projectsSection && experienceSection && articlesSection && contactSection) {  // Add contactSection here
         const heroBottom = heroSection.getBoundingClientRect().bottom;
         const aboutTop = aboutSection.getBoundingClientRect().top;
@@ -31,7 +31,7 @@ const App = () => {
         const articlesBottom = articlesSection.getBoundingClientRect().bottom;
         const contactTop = contactSection.getBoundingClientRect().top;  // Add this line
         const contactBottom = contactSection.getBoundingClientRect().bottom;  // Add this line
-        
+
         if (contactTop <= window.innerHeight / 2 && contactBottom > window.innerHeight / 2) {  // Add this
           setActiveSection('contact');
         } else if (articlesTop <= window.innerHeight / 2 && articlesBottom > window.innerHeight / 2) {
@@ -48,36 +48,41 @@ const App = () => {
       }
     };
 
-  window.addEventListener('scroll', handleScroll);
-  return () => window.removeEventListener('scroll', handleScroll);
-}, []);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&display=swap');
       `}</style>
-      
+
       <MinimalHeader activeSection={activeSection} setActiveSection={setActiveSection} />
       <SocialIcons />
       <ScrollIndicator />
-      
+
       <main className="relative">
         <div id="hero-section">
           <HeroSection />
         </div>
+        <div className="w-full h-[1px] bg-white opacity-10"></div>
         <div id="about-section">
           <AboutSection />
         </div>
-        <div id="projects-section">
-          <ProjectsPage />
-        </div>
+        <div className="w-full h-[1px] bg-white opacity-10"></div>
         <div id="experience-section">
           <ExperiencePage />
         </div>
+        <div className="w-full h-[1px] bg-white opacity-10"></div>
+        <div id="projects-section">
+          <ProjectsPage />
+        </div>
+        <div className="w-full h-[1px] bg-white opacity-10"></div>
         <div id="articles-section">
           <ArticlesPage />
         </div>
+        <div className="w-full h-[1px] bg-white opacity-10"></div>
         <div id="contact-section">
           <ContactPage />
         </div>
